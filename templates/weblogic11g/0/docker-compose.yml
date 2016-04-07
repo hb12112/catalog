@@ -18,5 +18,5 @@ wlssvc:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$$$${stack_name}/$$$${service_name}
     io.rancher.container.pull_image: always
   tty: true
-  image: 192.168.18.250:5002/wls1036-basedomain:v2.6
+  image: 192.168.18.250:5002/training/wls1036-basedomain:v2.6
   stdin_open: true
