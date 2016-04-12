@@ -1,6 +1,6 @@
 wp-lb:
   ports:
-  - 8001:80
+  - ${wp_port}:80
   tty: true
   image: rancher/load-balancer-service
   links:
@@ -8,9 +8,9 @@ wp-lb:
   stdin_open: true
 wordpress:
   environment:
-    WORDPRESS_DB_HOST: db:3306
-    WORDPRESS_DB_USER: root
-    WORDPRESS_DB_PASSWORD: rancher123
+    WORDPRESS_DB_HOST: ${db_host}
+    WORDPRESS_DB_USER: ${db_user}
+    WORDPRESS_DB_PASSWORD: ${db_passwd}
   log_driver: ''
   labels:
     io.rancher.container.pull_image: always
@@ -22,7 +22,7 @@ wordpress:
   stdin_open: true
 mysql:
   environment:
-    MYSQL_ROOT_PASSWORD: rancher123
+    MYSQL_ROOT_PASSWORD: ${db_passwd}
   log_driver: ''
   labels:
     io.rancher.container.pull_image: always

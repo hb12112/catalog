@@ -1,3 +1,35 @@
+.catalog:
+  name: "wordpress"
+  version: "1.0"
+  description: "wordpress with your application deployed"
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: wp_port
+      description: "worpress port"
+      label: "wp port"
+      type: "int"
+      required: true
+      default: "8001"
+  questions:
+    - variable: db_host
+      description: "database host"
+      label: "database host"
+      type: "string"
+      required: true
+      default: "db:3306"
+  questions:
+    - variable: db_user
+      description: "database user"
+      label: "database user"
+      type: "string"
+      required: true
+      default: "root"
+  questions:
+    - variable: db_passwd
+      description: "database password"
+      label: "database password"
+      type: "string"
+      required: true
 wp-lb:
   scale: 1
   load_balancer_config:
