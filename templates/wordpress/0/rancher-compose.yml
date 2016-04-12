@@ -10,21 +10,18 @@
       type: "int"
       required: true
       default: "8001"
-  questions:
     - variable: db_host
       description: "database host"
       label: "database host"
       type: "string"
       required: true
       default: "db:3306"
-  questions:
     - variable: db_user
       description: "database user"
       label: "database user"
       type: "string"
       required: true
       default: "root"
-  questions:
     - variable: db_passwd
       description: "database password"
       label: "database password"
