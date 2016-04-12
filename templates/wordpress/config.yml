@@ -1,0 +1,5 @@
+name: Wordpress
+description: |
+  wordpress with your application deployed.
+version: 1.0
+category: blog
