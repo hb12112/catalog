@@ -1,5 +1,5 @@
 autoscale:
-  image: 192.168.18.250:5002/training/rhel-autoscale
+  image: 192.168.180.205:5000/rhel-autoscale
   environment:
     RANCHER_USER: "${apiname}"
     RANCHER_PASSWORD: "${apikey}"
