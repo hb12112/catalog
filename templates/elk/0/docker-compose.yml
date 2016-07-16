@@ -1,45 +1,39 @@
-logstash:
+elasticsearch:
+  image: index.youruncloud.com/catalog/elasticsearch:v1.0.0
+  restart: always
   ports:
-  - ${ELK_LTU_port}:5000/tcp
-  - ${ELK_LTU_port}:5000/udp
-  - ${ELK_LPout_port}:5043/tcp
-  - ${ELK_LFilebeat_port}:5044/tcp
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:host_label: ${hostlabel_key}=${hostlabel_value}
-  command: logstash -f /etc/conf/logstash.conf
+   - "9200:9200"
+   - "9300:9300"
   tty: true
-  image: 192.168.180.205:5000/logstash:v1.0.0
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+  stdin_open: true
+logstash:
+  image: index.youruncloud.com/catalog/logstash:v1.0.0
+  restart: always
+  ports:
+   - "5000:5000/tcp"
+   - "5000:5000/udp"
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${hostlabel_key}=${hostlabel_value}
+  tty: true
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - ${logstash_conf_dir}/logstash.conf:/etc/logstash.conf
   environment:
     LOGSPOUT: 'ignore'
+  command: logstash -f /etc/logstash.conf
   links:
-  - elasticsearch:db
-  volumes:
-  - ${logstash_conf_dir}/conf:/etc/conf
-  - /etc/localtime:/etc/localtime:ro
+   - elasticsearch:db
   stdin_open: true
 kibana:
+  image: index.youruncloud.com/catalog/kibana:v1.0.0
+  restart: always
   ports:
-  - ${ELK_KUI_port}:5601/tcp
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:host_label: ${hostlabel_key}=${hostlabel_value}
+   - "5601:5601"
   tty: true
-  image: 192.168.180.205:5000/kibana:v1.0.0
   links:
-  - elasticsearch:elasticsearch
+   - elasticsearch:elasticsearch
   volumes:
-  - /etc/localtime:/etc/localtime:ro
-  stdin_open: true
-elasticsearch:
-  ports:
-  - ${ELK_EL_port1}:9200/tcp
-  - ${ELK_EL_port2}:9300/tcp
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:host_label: ${hostlabel_key}=${hostlabel_value}
-  tty: true
-  image: 192.168.180.205:5000/elasticsearch:v1.0.0
-  volumes:
-  - /etc/localtime:/etc/localtime:ro
+   - /etc/localtime:/etc/localtime:ro
   stdin_open: true
