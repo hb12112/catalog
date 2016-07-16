@@ -1,5 +1,5 @@
 elasticsearch:
-  image: index.youruncloud.com/catalog/elasticsearch:v1.0.0
+  image: 192.168.180.205:5000/elasticsearch:v1.0.0
   restart: always
   ports:
    - "9200:9200"
@@ -9,7 +9,7 @@ elasticsearch:
    - /etc/localtime:/etc/localtime:ro
   stdin_open: true
 logstash:
-  image: index.youruncloud.com/catalog/logstash:v1.0.0
+  image: 192.168.180.205:5000/logstash:v1.0.0
   restart: always
   ports:
    - "5000:5000/tcp"
@@ -27,7 +27,7 @@ logstash:
    - elasticsearch:db
   stdin_open: true
 kibana:
-  image: index.youruncloud.com/catalog/kibana:v1.0.0
+  image: 192.168.180.205:5000/kibana:v1.0.0
   restart: always
   ports:
    - "5601:5601"
