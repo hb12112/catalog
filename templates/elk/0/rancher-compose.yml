@@ -3,7 +3,6 @@
   version: 1.0.0
   description: |
     Collect, search and visualise log data with ELK (Elasticsearch 2.3.2, Logstash 2.3.2, Kibana 4.5.0).
-  uuid: elk-0
   questions:
     - variable: "hostlabel_key"
       description: "部署ELK的主机标签的Key值"
